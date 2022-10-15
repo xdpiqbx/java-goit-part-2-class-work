@@ -24,4 +24,23 @@ public class FactorialTest {
     public void testThat12HandledCorrectly(){
         Assertions.assertEquals(479001600, new Factorial().calc(12));
     }
+    @Test
+    public void testThat18HandledCorrectly(){
+        Assertions.assertEquals(6402373705728000L, new Factorial().calc(18));
+    }
+    @Test
+    public void testThatNegativeInputHandledCorrectly(){
+        Assertions.assertThrows(
+                IllegalArgumentException.class,
+                () -> new Factorial().calc(-1)
+        );
+    }
+    @Test
+    public void testThatTooBigInputHandledCorrectly(){
+        int maxN = 20;
+        Assertions.assertThrows(
+                IllegalArgumentException.class,
+                () -> new Factorial().calc(maxN + 1)
+        );
+    }
 }
