@@ -1,4 +1,4 @@
-package goit.xdpiqbx;
+package goit.xdpiqbx.basicFactorial;
 
 public class Factorial {
     public long calc(long n){

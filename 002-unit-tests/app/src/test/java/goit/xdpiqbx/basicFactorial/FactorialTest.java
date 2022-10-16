@@ -1,5 +1,6 @@
-package goit.xdpiqbx;
+package goit.xdpiqbx.basicFactorial;
 
+import goit.xdpiqbx.basicFactorial.Factorial;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
