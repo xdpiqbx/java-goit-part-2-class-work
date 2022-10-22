@@ -10,5 +10,6 @@ public class Problem7 {
                 default: throw new IllegalArgumentException("Not implemented");
             }
         }
+        return 0;
     }
 }
