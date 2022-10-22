@@ -21,7 +21,10 @@ class Problem7Tests {
         testCases.put("IX", 9);
         testCases.put("X", 10);
         testCases.forEach((rome, expectedArabic) ->
-            Assertions.assertEquals(expectedArabic, new Problem7().romeToArabic(rome))
+            Assertions.assertEquals(
+                    expectedArabic,
+                    new Problem7().romeToArabic(rome),
+                    rome)
         );
     }
 }
