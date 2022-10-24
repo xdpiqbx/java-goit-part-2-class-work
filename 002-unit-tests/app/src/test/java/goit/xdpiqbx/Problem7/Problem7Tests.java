@@ -52,6 +52,8 @@ class Problem7Tests {
         testCases.put(9, "IX");
         testCases.put(10, "X");
 
+        testCases.put(98, "XCVIII");
+
         testCases.forEach((arabic, expectedRome) ->
             Assertions.assertEquals(
                     expectedRome,
@@ -59,5 +61,21 @@ class Problem7Tests {
                     Integer.toString(arabic)
             )
         );
+    }
+
+    @Test
+    public void testThatCalculateMethodWorksOk(){
+        Map<String, String> testCases = new HashMap<>();
+        testCases.put("III+IV", "VII");
+        testCases.put("II+II", "IV");
+        testCases.put("I+X", "XI");
+
+        testCases.forEach((expression, expected) -> {
+            Assertions.assertEquals(
+                    expected,
+                    new Problem7().calculateRomanSum(expression),
+                    expression
+            );
+        });
     }
 }

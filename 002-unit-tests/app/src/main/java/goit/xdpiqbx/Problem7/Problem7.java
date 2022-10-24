@@ -1,7 +1,7 @@
 package goit.xdpiqbx.Problem7;
 
-import java.util.HashMap;
-import java.util.Map;
+import java.util.*;
+import java.util.stream.Collectors;
 
 public class Problem7 {
     public int romeToArabic(String rome) {
@@ -38,15 +38,61 @@ public class Problem7 {
     }
 
     public String arabicToRome(int arabic) {
-        Map<Character, Integer> romeArabicValues = new HashMap<>();
-        romeArabicValues.put('I', 1);
-        romeArabicValues.put('V', 5);
-        romeArabicValues.put('X', 10);
-        romeArabicValues.put('L', 50);
-        romeArabicValues.put('C', 100);
-        romeArabicValues.put('D', 500);
-        romeArabicValues.put('M', 1000);
+        if ((arabic <= 0) || (arabic > 4000)) {
+            throw new IllegalArgumentException(arabic + " is not in range (0,4000]");
+        }
 
-        return "I";
+        List<RomanNumeral> romanNumerals = RomanNumeral.getReverseSortedValues();
+
+        int i = 0;
+        StringBuilder sb = new StringBuilder();
+
+        while ((arabic > 0) && (i < romanNumerals.size())) {
+            RomanNumeral currentSymbol = romanNumerals.get(i);
+            if (currentSymbol.getValue() <= arabic) {
+                sb.append(currentSymbol.name());
+                arabic -= currentSymbol.getValue();
+            } else {
+                i++;
+            }
+        }
+
+        return sb.toString();
+    }
+
+    public String calculateRomanSum(String expression) {
+        int arabicSum = Arrays.stream(expression.split("\\+"))
+                .mapToInt(it -> romeToArabic(it))
+                .sum();
+        return arabicToRome(arabicSum);
+//        String[] romeNumbers = expression.split("\\+");
+//
+//        int result = 0;
+//        for (String romeNum: romeNumbers) {
+//            result += romeToArabic(romeNum);
+//        }
+//        return arabicToRome(result);
+    }
+
+    enum RomanNumeral {
+        I(1), IV(4), V(5), IX(9), X(10),
+        XL(40), L(50), XC(90), C(100),
+        CD(400), D(500), CM(900), M(1000);
+
+        private int value;
+
+        RomanNumeral(int value) {
+            this.value = value;
+        }
+
+        public int getValue() {
+            return value;
+        }
+
+        public static List<RomanNumeral> getReverseSortedValues() {
+            return Arrays.stream(values())
+                    .sorted(Comparator.comparing((RomanNumeral e) -> e.value).reversed())
+                    .collect(Collectors.toList());
+        }
     }
 }
